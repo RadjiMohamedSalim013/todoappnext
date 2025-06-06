@@ -1,4 +1,3 @@
-// src/app/api/tasks/[id]/route.ts
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongo";
 import { lireTacheParId, modifierTache, supprimerTache } from "@/gateway/taskGateway";
