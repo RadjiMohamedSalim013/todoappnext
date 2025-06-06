@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Todo App
 
-## Getting Started
+Une application simple de gestion de tâches construite avec Next.js, React et MongoDB. Cette application permet aux utilisateurs de créer, lire, mettre à jour et supprimer des tâches avec une interface propre et réactive.
 
-First, run the development server:
+## Fonctionnalités
+
+- Création de nouvelles tâches avec un titre
+- Visualisation d'une liste de tâches avec leur statut (incomplète ou terminée)
+- Mise à jour du titre et du statut des tâches
+- Suppression des tâches
+- Filtrage des tâches par statut (toutes, terminées, incomplètes)
+- Recherche de tâches par titre
+- Statistiques des tâches (total, terminées, en cours)
+- Interface réactive et conviviale
+
+## Technologies utilisées
+
+- [Next.js](https://nextjs.org/) (framework React)
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [MongoDB](https://www.mongodb.com/) avec [Mongoose](https://mongoosejs.com/)
+- [Tailwind CSS](https://tailwindcss.com/) pour le style
+- [Lucide React](https://lucide.dev/) pour les icônes
+
+## Installation
+
+1. Cloner le dépôt :
+
+   ```bash
+   git clone <repository-url>
+   cd todo-app
+   ```
+
+2. Installer les dépendances :
+
+   ```bash
+   npm install
+   ```
+
+3. Créer un fichier `.env.local` à la racine et ajouter votre chaîne de connexion MongoDB :
+
+   ```
+   MONGODB_URI=your_mongodb_connection_string
+   ```
+
+## Utilisation
+
+Démarrer le serveur de développement :
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrez votre navigateur et allez à [http://localhost:3000](http://localhost:3000). L'application redirigera vers la page des tâches.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Endpoints API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `GET /api/tasks` - Récupérer toutes les tâches
+- `POST /api/tasks` - Créer une nouvelle tâche (corps JSON : `{ "title": "Titre de la tâche" }`)
+- `GET /api/tasks/:id` - Récupérer une tâche par ID
+- `PUT /api/tasks/:id` - Mettre à jour une tâche par ID (corps JSON : `{ "title": "Nouveau titre", "status": "complete" | "incomplete" }`)
+- `DELETE /api/tasks/:id` - Supprimer une tâche par ID
 
-## Learn More
+## Structure du projet
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── api/
+│   │   └── tasks/           # Routes API pour les tâches
+│   ├── createtask/          # Page pour créer une nouvelle tâche
+│   ├── delete/              # Page pour supprimer une tâche
+│   ├── edit/                # Page pour modifier une tâche
+│   ├── tasks/               # Page principale de la liste des tâches
+│   ├── page.tsx             # Redirection vers /tasks
+│   └── globals.css          # Styles globaux
+├── components/              # Composants React (TaskItem, TaskCreate, TaskEdit, TaskFilter, TaskStats, TaskSearch)
+├── gateway/                 # Couche d'accès aux données pour les tâches (taskGateway.ts)
+├── lib/                     # Connexion MongoDB (mongo.ts)
+├── models/                  # Modèles Mongoose (Task.ts)
+├── types/                   # Types TypeScript
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Licence
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ce projet est sous licence MIT.
