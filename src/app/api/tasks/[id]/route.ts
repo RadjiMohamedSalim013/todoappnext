@@ -4,9 +4,9 @@ import { lireTacheParId, modifierTache, supprimerTache } from "@/gateway/taskGat
 
 export async function GET(
   request: Request,
+  { params }: { params: { id: string } }
 ) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
+  const id = params.id;
   if (!id) return NextResponse.json({ message: "ID manquant" }, { status: 400 });
 
   await connectDB();
@@ -19,9 +19,9 @@ export async function GET(
 
 export async function PUT(
   request: Request,
+  { params }: { params: { id: string } }
 ) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
+  const id = params.id;
   if (!id) return NextResponse.json({ message: "ID manquant" }, { status: 400 });
 
   await connectDB();
@@ -36,9 +36,9 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
+  { params }: { params: { id: string } }
 ) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
+  const id = params.id;
   if (!id) return NextResponse.json({ message: "ID manquant" }, { status: 400 });
 
   await connectDB();
