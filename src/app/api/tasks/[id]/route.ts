@@ -1,10 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongo";
 import { lireTacheParId, modifierTache, supprimerTache } from "@/gateway/taskGateway";
 
-type Context = { params: { id: string } };
-
-export async function GET(request: Request, context: Context) {
+export async function GET(request: Request, context: any) {
   const id = context.params.id;
   if (!id) return NextResponse.json({ message: "ID manquant" }, { status: 400 });
 
@@ -16,7 +15,7 @@ export async function GET(request: Request, context: Context) {
   return NextResponse.json(tache);
 }
 
-export async function PUT(request: Request, context: Context) {
+export async function PUT(request: Request, context: any) {
   const id = context.params.id;
   if (!id) return NextResponse.json({ message: "ID manquant" }, { status: 400 });
 
@@ -30,7 +29,7 @@ export async function PUT(request: Request, context: Context) {
   return NextResponse.json(tacheModifiee);
 }
 
-export async function DELETE(request: Request, context: Context) {
+export async function DELETE(request: Request, context: any) {
   const id = context.params.id;
   if (!id) return NextResponse.json({ message: "ID manquant" }, { status: 400 });
 
