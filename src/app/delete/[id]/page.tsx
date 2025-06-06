@@ -9,23 +9,23 @@ export default function DeleteTaskPage() {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = "auto"; };
+  }, []);
+
   if (!id) return <p className="p-4 text-red-500">ID de la tâche manquant.</p>;
 
   const handleDelete = async () => {
     setLoading(true);
     await fetch(`/api/tasks/${id}`, { method: "DELETE" });
     setLoading(false);
-    router.push("/");
+    router.push("/tasks");
   };
 
   const handleCancel = () => {
-    router.push("/");
+    router.push("/tasks");
   };
-
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = "auto"; };
-  }, []);
 
   return (
     <>
