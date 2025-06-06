@@ -4,11 +4,14 @@ import { lireTacheParId, modifierTache, supprimerTache } from "@/gateway/taskGat
 
 export async function GET(
   request: Request,
-  context: { params: { id: string } }
 ) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+  if (!id) return NextResponse.json({ message: "ID manquant" }, { status: 400 });
+
   await connectDB();
 
-  const tache = await lireTacheParId(context.params.id);
+  const tache = await lireTacheParId(id);
   if (!tache) return NextResponse.json({ message: "Tâche non trouvée" }, { status: 404 });
 
   return NextResponse.json(tache);
@@ -16,13 +19,16 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  context: { params: { id: string } }
 ) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+  if (!id) return NextResponse.json({ message: "ID manquant" }, { status: 400 });
+
   await connectDB();
 
   const data = await request.json();
 
-  const tacheModifiee = await modifierTache(context.params.id, data);
+  const tacheModifiee = await modifierTache(id, data);
   if (!tacheModifiee) return NextResponse.json({ message: "Tâche non trouvée" }, { status: 404 });
 
   return NextResponse.json(tacheModifiee);
@@ -30,11 +36,14 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  context: { params: { id: string } }
 ) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+  if (!id) return NextResponse.json({ message: "ID manquant" }, { status: 400 });
+
   await connectDB();
 
-  const tacheSupprimee = await supprimerTache(context.params.id);
+  const tacheSupprimee = await supprimerTache(id);
   if (!tacheSupprimee) return NextResponse.json({ message: "Tâche non trouvée" }, { status: 404 });
 
   return NextResponse.json({ message: "Tâche supprimée" });
