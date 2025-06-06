@@ -9,7 +9,7 @@ export async function GET() {
   try {
     const taches = await lireToutesLesTaches();
     return NextResponse.json(taches);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });
   }
 }
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     const { title } = await req.json();
     const tache = await creerTache(title);
     return NextResponse.json(tache, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });
   }
 }
